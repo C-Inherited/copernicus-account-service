@@ -13,7 +13,7 @@ public class Opportunity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int opportunityId;
+    private int id;
     @Enumerated(EnumType.STRING)
     private Product product;
     private int quantity;
@@ -34,8 +34,8 @@ public class Opportunity {
     public Opportunity() {
     }
 
-    public Opportunity(int opportunityId, Product product, int quantity, Contact decisionMaker, Status status, Integer salesRepId, Account account) {
-        this.opportunityId = opportunityId;
+    public Opportunity(int id, Product product, int quantity, Contact decisionMaker, Status status, Integer salesRepId, Account account) {
+        this.id = id;
         this.product = product;
         this.quantity = quantity;
         this.decisionMaker = decisionMaker;
@@ -68,16 +68,16 @@ public class Opportunity {
         return status;
     }
 
-    public int getOpportunityId() {
-        return opportunityId;
+    public int getId() {
+        return id;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public void setOpportunityId(int opportunityId) {
-        this.opportunityId = opportunityId;
+    public void setId(int opportunityId) {
+        this.id = id;
     }
 
     public void setProduct(Product product) {

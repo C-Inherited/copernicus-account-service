@@ -1,9 +1,16 @@
 package com.ironhack.account.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.ironhack.account.model.Account;
+import com.ironhack.account.model.Contact;
+import com.ironhack.account.model.Opportunity;
+
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class AccountDTO {
 
@@ -19,9 +26,15 @@ public class AccountDTO {
     @NotEmpty
     private String country;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<OpportunityDTO> opportunities = null;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<ContactDTO> contacts = null;
 
     public AccountDTO() {
     }
+
 
     public AccountDTO(Integer id, @NotEmpty String industry, @NotNull @Min(value = 0, message = "can not less than 0") Integer employeeCount, @NotEmpty String city, @NotEmpty String country) {
         this.id = id;
@@ -29,6 +42,44 @@ public class AccountDTO {
         this.employeeCount = employeeCount;
         this.city = city;
         this.country = country;
+    }
+
+    public AccountDTO(Integer id, @NotEmpty String industry, @NotNull @Min(value = 0, message = "can not less than 0") Integer employeeCount, @NotEmpty String city, @NotEmpty String country, List<OpportunityDTO> opportunities, List<ContactDTO> contacts) {
+        this.id = id;
+        this.industry = industry;
+        this.employeeCount = employeeCount;
+        this.city = city;
+        this.country = country;
+        this.opportunities = opportunities;
+        this.contacts = contacts;
+    }
+
+    public static AccountDTO parseFromAccount(Account account) {
+        return new AccountDTO(
+                account.getId(),
+                account.getIndustry().name(),
+                account.getEmployeeCount(),
+                account.getCity(),
+                account.getCountry(),
+                account.getOpportunityList().stream().map(OpportunityDTO::parseFromOpportunity).collect(Collectors.toList()),
+                account.getContactList().stream().map(ContactDTO::new).collect(Collectors.toList())
+        );
+    }
+
+    public List<OpportunityDTO> getOpportunities() {
+        return opportunities;
+    }
+
+    public void setOpportunities(List<OpportunityDTO> opportunities) {
+        this.opportunities = opportunities;
+    }
+
+    public List<ContactDTO> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<ContactDTO> contacts) {
+        this.contacts = contacts;
     }
 
     public Integer getId() {

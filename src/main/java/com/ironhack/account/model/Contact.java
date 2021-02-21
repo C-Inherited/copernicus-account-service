@@ -9,7 +9,7 @@ public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int contactId;
+    private int id;
     private String name;
     private String phoneNumber;
     private String email;
@@ -48,8 +48,8 @@ public class Contact {
         return companyName;
     }
 
-    public int getContactId() {
-        return contactId;
+    public int getId() {
+        return id;
     }
 
     public Account getAccount() {

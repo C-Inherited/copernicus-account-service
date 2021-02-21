@@ -16,7 +16,7 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer accountId;
+    private Integer id;
 
     @Enumerated(EnumType.STRING)
     private Industry industry;
@@ -45,8 +45,8 @@ public class Account {
         this.opportunityList = new ArrayList<>();
     }
 
-    public Account(Integer accountId, Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
-        this.accountId = accountId;
+    public Account(Integer id, Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
+        this.id = id;
         this.industry = industry;
         this.employeeCount = employeeCount;
         this.city = city;
@@ -55,12 +55,12 @@ public class Account {
         this.opportunityList = opportunityList;
     }
 
-    public Integer getAccountId() {
-        return accountId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setAccountId(Integer accountId) {
-        this.accountId = accountId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Industry getIndustry() {

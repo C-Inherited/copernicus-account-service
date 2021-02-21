@@ -22,23 +22,23 @@ public class AccountService implements IAccountService {
     public AccountDTO getAccount(Integer id){
         Account account = accountRepository.findById(id).orElseThrow(() ->  new ResponseStatusException(HttpStatus.NOT_FOUND,"Account not Found"));
 
-        return new AccountDTO(account.getAccountId(), account.getIndustry().name(),account.getEmployeeCount(),account.getCity(),account.getCountry());
+        return AccountDTO.parseFromAccount(account);
     }
 
     public AccountDTO createAccount(AccountDTO accountDTO){
 
        Account account = accountRepository.save(new Account(Industry.valueOf(accountDTO.getIndustry()),accountDTO.getEmployeeCount(), accountDTO.getCity(), accountDTO.getCountry()));
 
-       return new AccountDTO(account.getAccountId(), account.getIndustry().name(),account.getEmployeeCount(),account.getCity(),account.getCountry());
+       return new AccountDTO(account.getId(), account.getIndustry().name(),account.getEmployeeCount(),account.getCity(),account.getCountry());
     }
 
     public AccountDTO updateAccount(AccountDTO accountDTO, Integer id){
         accountRepository.findById(id).orElseThrow(() ->  new ResponseStatusException(HttpStatus.NOT_FOUND,"Account not Found"));
         Account account = new Account(Industry.valueOf(accountDTO.getIndustry()),accountDTO.getEmployeeCount(), accountDTO.getCity(), accountDTO.getCountry());
-        account.setAccountId(id);
+        account.setId(id);
         Account accountUpdated = accountRepository.save(account);
 
-        return new AccountDTO(accountUpdated.getAccountId(), accountUpdated.getIndustry().name(),accountUpdated.getEmployeeCount(),accountUpdated.getCity(),accountUpdated.getCountry());
+        return AccountDTO.parseFromAccount(accountUpdated);
     }
 
     public void deleteAccount(Integer id){
@@ -48,6 +48,6 @@ public class AccountService implements IAccountService {
     }
 
     public List<AccountDTO> findAll(){
-        return accountRepository.findAll().stream().map(account -> new AccountDTO(account.getAccountId(), account.getIndustry().name(),account.getEmployeeCount(),account.getCity(),account.getCountry())).collect(Collectors.toList());
+        return accountRepository.findAll().stream().map(AccountDTO::parseFromAccount).collect(Collectors.toList());
     }
 }
