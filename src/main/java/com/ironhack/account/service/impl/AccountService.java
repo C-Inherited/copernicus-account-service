@@ -26,7 +26,6 @@ public class AccountService implements IAccountService {
     }
 
     public AccountDTO createAccount(AccountDTO accountDTO){
-
        Account account = accountRepository.save(new Account(Industry.valueOf(accountDTO.getIndustry()),accountDTO.getEmployeeCount(), accountDTO.getCity(), accountDTO.getCountry()));
 
        return new AccountDTO(account.getId(), account.getIndustry().name(),account.getEmployeeCount(),account.getCity(),account.getCountry());

@@ -66,6 +66,7 @@ public class AccountDTO {
         );
     }
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<OpportunityDTO> getOpportunities() {
         return opportunities;
     }
@@ -74,6 +75,7 @@ public class AccountDTO {
         this.opportunities = opportunities;
     }
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public List<ContactDTO> getContacts() {
         return contacts;
     }

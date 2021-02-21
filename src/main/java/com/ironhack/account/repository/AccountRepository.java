@@ -10,8 +10,6 @@ import java.util.List;
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
 
-    public Account findByAccountId(Integer id);
-
     @Query("SELECT AVG(a.employeeCount) FROM Account a")
     public Object[] findMeanEmployeeCount();
 

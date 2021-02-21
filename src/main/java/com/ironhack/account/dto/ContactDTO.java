@@ -1,8 +1,10 @@
 package com.ironhack.account.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ironhack.account.model.Contact;
 
 public class ContactDTO {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer id;
     private String name;
     private String phoneNumber;
@@ -61,6 +63,7 @@ public class ContactDTO {
         this.accountId = accountId;
     }
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer getId() {
         return id;
     }

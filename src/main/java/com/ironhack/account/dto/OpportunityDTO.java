@@ -1,8 +1,10 @@
 package com.ironhack.account.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ironhack.account.model.Opportunity;
 
 public class OpportunityDTO {
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer id;
     private String product;
     private Integer quantity;
@@ -35,6 +37,7 @@ public class OpportunityDTO {
                 opportunity.getStatus().toString());
     }
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public Integer getId() {
         return id;
     }
