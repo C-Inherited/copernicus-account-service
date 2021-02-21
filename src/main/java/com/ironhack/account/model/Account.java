@@ -16,7 +16,7 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int accountId;
+    private Integer accountId;
 
     @Enumerated(EnumType.STRING)
     private Industry industry;
@@ -24,11 +24,11 @@ public class Account {
     private String city;
     private String country;
 
-    @OneToMany(fetch=FetchType.EAGER, mappedBy = "account")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
     @Fetch(FetchMode.SUBSELECT)  // we need this to have several "eager"
     private List<Contact> contactList = new ArrayList<>();
 
-    @OneToMany(fetch=FetchType.EAGER, mappedBy = "account")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "account")
     @Fetch(FetchMode.SUBSELECT)
     private List<Opportunity> opportunityList = new ArrayList<>();
 
@@ -36,28 +36,44 @@ public class Account {
     public Account() {
     }
 
-    public Account(Industry industry, int employeeCount, String city, String country,
-                   Contact contact, Opportunity opportunity) {
+    public Account(Industry industry, int employeeCount, String city, String country) {
+        this.industry = industry;
         this.employeeCount = employeeCount;
         this.city = city;
         this.country = country;
-        this.industry = industry;
-        this.contactList.add(contact);
-        this.opportunityList.add(opportunity);
+        this.contactList = new ArrayList<>();
+        this.opportunityList = new ArrayList<>();
     }
 
-    public Account(Industry industry, int employeeCount, String city, String country,
-                   List<Contact> contacts, List<Opportunity> opportunities) {
-        this.employeeCount = employeeCount;
-        this.city = city;
-        this.country = country;
+
+
+    public Industry getIndustry() {
+        return industry;
+    }
+
+
+    public void setIndustry(Industry industry) {
         this.industry = industry;
-        for (Contact contact : contacts){
-            this.contactList.add(contact);
-        }
-        for (Opportunity opportunity : opportunities){
-            this.opportunityList.add(opportunity);
-        }
+    }
+
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
+    }
+
+    public void setEmployeeCount(int employeeCount) {
+        this.employeeCount = employeeCount;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setContactList(List<Contact> contactList) {
+        this.contactList = contactList;
     }
 
     public int getEmployeeCount() {
