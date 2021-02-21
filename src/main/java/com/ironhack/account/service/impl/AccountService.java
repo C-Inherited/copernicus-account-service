@@ -10,6 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class AccountService implements IAccountService {
 
@@ -44,4 +47,7 @@ public class AccountService implements IAccountService {
         accountRepository.delete(account);
     }
 
+    public List<AccountDTO> findAll(){
+        return accountRepository.findAll().stream().map(account -> new AccountDTO(account.getAccountId(), account.getIndustry().name(),account.getEmployeeCount(),account.getCity(),account.getCountry())).collect(Collectors.toList());
+    }
 }
