@@ -45,67 +45,69 @@ public class Account {
         this.opportunityList = new ArrayList<>();
     }
 
-
-
-    public Industry getIndustry() {
-        return industry;
+    public Account(Integer accountId, Industry industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
+        this.accountId = accountId;
+        this.industry = industry;
+        this.employeeCount = employeeCount;
+        this.city = city;
+        this.country = country;
+        this.contactList = contactList;
+        this.opportunityList = opportunityList;
     }
 
-
-    public void setIndustry(Industry industry) {
-        this.industry = industry;
+    public Integer getAccountId() {
+        return accountId;
     }
 
     public void setAccountId(Integer accountId) {
         this.accountId = accountId;
     }
 
-    public void setEmployeeCount(int employeeCount) {
-        this.employeeCount = employeeCount;
+    public Industry getIndustry() {
+        return industry;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public void setContactList(List<Contact> contactList) {
-        this.contactList = contactList;
+    public void setIndustry(Industry industry) {
+        this.industry = industry;
     }
 
     public int getEmployeeCount() {
         return employeeCount;
     }
 
+    public void setEmployeeCount(int employeeCount) {
+        this.employeeCount = employeeCount;
+    }
+
     public String getCity() {
         return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getCountry() {
         return country;
     }
 
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public List<Contact> getContactList() {
         return contactList;
+    }
+
+    public void setContactList(List<Contact> contactList) {
+        this.contactList = contactList;
     }
 
     public List<Opportunity> getOpportunityList() {
         return opportunityList;
     }
 
-    public int getAccountId() {
-        return accountId;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Account account = (Account) o;
-        return employeeCount == account.employeeCount && industry == account.industry && Objects.equals(city, account.city) && Objects.equals(country, account.country) && Objects.equals(contactList, account.contactList) && Objects.equals(opportunityList, account.opportunityList);
+    public void setOpportunityList(List<Opportunity> opportunityList) {
+        this.opportunityList = opportunityList;
     }
 }
