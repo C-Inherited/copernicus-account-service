@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,7 @@ public class AccountService implements IAccountService {
         return AccountDTO.parseFromAccount(account);
     }
 
+    @Transactional
     public AccountDTO createAccount(AccountDTO accountDTO){
        Account account = accountRepository.save(new Account(Industry.valueOf(accountDTO.getIndustry()),accountDTO.getEmployeeCount(), accountDTO.getCity(), accountDTO.getCountry()));
 
