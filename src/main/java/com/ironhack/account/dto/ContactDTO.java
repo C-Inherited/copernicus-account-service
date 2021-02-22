@@ -3,6 +3,8 @@ package com.ironhack.account.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ironhack.account.model.Contact;
 
+import java.util.Objects;
+
 public class ContactDTO {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer id;
@@ -70,5 +72,18 @@ public class ContactDTO {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactDTO that = (ContactDTO) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(email, that.email) && Objects.equals(companyName, that.companyName) && Objects.equals(accountId, that.accountId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, phoneNumber, email, companyName, accountId);
     }
 }

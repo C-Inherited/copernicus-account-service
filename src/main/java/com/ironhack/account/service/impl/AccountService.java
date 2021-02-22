@@ -20,6 +20,10 @@ public class AccountService implements IAccountService {
     @Autowired
     private AccountRepository accountRepository;
 
+    public List<AccountDTO> findAll(){
+        return accountRepository.findAll().stream().map(AccountDTO::parseFromAccount).collect(Collectors.toList());
+    }
+
     public AccountDTO getAccount(Integer id){
         Account account = accountRepository.findById(id).orElseThrow(() ->  new ResponseStatusException(HttpStatus.NOT_FOUND,"Account not Found"));
 
@@ -48,7 +52,5 @@ public class AccountService implements IAccountService {
         accountRepository.delete(account);
     }
 
-    public List<AccountDTO> findAll(){
-        return accountRepository.findAll().stream().map(AccountDTO::parseFromAccount).collect(Collectors.toList());
-    }
+
 }

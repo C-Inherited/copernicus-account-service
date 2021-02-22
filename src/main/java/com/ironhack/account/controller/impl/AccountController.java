@@ -21,6 +21,7 @@ public class AccountController implements IAccountController {
     public AccountDTO getAccount(@PathVariable (name = "id") Integer id){
         return accountService.getAccount(id);
     }
+
     @GetMapping("/accounts")
     @ResponseStatus(HttpStatus.OK)
     public List<AccountDTO> getAllAccounts(){

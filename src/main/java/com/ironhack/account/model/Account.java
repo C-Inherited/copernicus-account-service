@@ -110,4 +110,18 @@ public class Account {
     public void setOpportunityList(List<Opportunity> opportunityList) {
         this.opportunityList = opportunityList;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return employeeCount == account.employeeCount && Objects.equals(id, account.id) && industry == account.industry && Objects.equals(city, account.city) && Objects.equals(country, account.country) && Objects.equals(contactList, account.contactList) && Objects.equals(opportunityList, account.opportunityList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, industry, employeeCount, city, country, contactList, opportunityList);
+    }
 }

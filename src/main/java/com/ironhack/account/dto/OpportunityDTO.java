@@ -3,6 +3,8 @@ package com.ironhack.account.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ironhack.account.model.Opportunity;
 
+import java.util.Objects;
+
 public class OpportunityDTO {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer id;
@@ -92,5 +94,18 @@ public class OpportunityDTO {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OpportunityDTO that = (OpportunityDTO) o;
+        return Objects.equals(id, that.id) && Objects.equals(product, that.product) && Objects.equals(quantity, that.quantity) && Objects.equals(contactId, that.contactId) && Objects.equals(salesRepId, that.salesRepId) && Objects.equals(accountId, that.accountId) && Objects.equals(status, that.status);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, product, quantity, contactId, salesRepId, accountId, status);
     }
 }

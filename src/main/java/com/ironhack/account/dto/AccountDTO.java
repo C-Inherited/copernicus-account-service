@@ -10,6 +10,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class AccountDTO {
@@ -122,5 +123,18 @@ public class AccountDTO {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AccountDTO that = (AccountDTO) o;
+        return Objects.equals(id, that.id) && Objects.equals(industry, that.industry) && Objects.equals(employeeCount, that.employeeCount) && Objects.equals(city, that.city) && Objects.equals(country, that.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, industry, employeeCount, city, country);
     }
 }
