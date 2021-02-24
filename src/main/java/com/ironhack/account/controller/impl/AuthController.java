@@ -29,7 +29,7 @@ public class AuthController {
     private static String contactAuthOk;
 
     /** AUTHENTICATION **/
-    @PostMapping("account/authenticate")
+    @PostMapping("/account/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
         try {
