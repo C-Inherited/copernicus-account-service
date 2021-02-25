@@ -54,7 +54,8 @@ class AccountControllerTest {
         when(accountService.getAccount(1)).thenReturn(accountDto);
 
         MvcResult result = mockMvc
-                .perform(get("/account/1"))
+                .perform(get("/account/1")
+                        .header("Authorization", "Bearer auth"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -68,7 +69,9 @@ class AccountControllerTest {
         when(accountService.findAll()).thenReturn(List.of(accountDto));
 
         MvcResult result = mockMvc
-                .perform(get("/accounts"))
+                .perform(
+                        get("/accounts")
+                                .header("Authorization", "Bearer auth"))
                 .andExpect(status().isOk())
                 .andReturn();
 
@@ -84,6 +87,7 @@ class AccountControllerTest {
 
         MvcResult result = mockMvc
                 .perform(post("/account")
+                        .header("Authorization", "Bearer auth")
                         .content(body).contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isCreated())
@@ -101,7 +105,9 @@ class AccountControllerTest {
 
         MvcResult result = mockMvc
                 .perform(put("/account/1")
-                        .content(body).contentType(MediaType.APPLICATION_JSON)
+                        .content(body)
+                        .header("Authorization", "Bearer auth")
+                        .contentType(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isOk())
                 .andReturn();
@@ -114,7 +120,8 @@ class AccountControllerTest {
         when(accountService.updateAccount(accountDto, 1)).thenReturn(accountDto);
 
         mockMvc
-                .perform(delete("/account/1"))
+                .perform(delete("/account/1")
+                        .header("Authorization", "Bearer auth"))
                 .andExpect(status().isOk())
                 .andReturn();
     }
